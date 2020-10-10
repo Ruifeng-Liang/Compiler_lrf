@@ -18,7 +18,7 @@ public class Main {
             reader = new InputStreamReader(new FileInputStream(file));
             int tempchar;
             while ((tempchar = reader.read()) != -1) {
-                if (((char) tempchar) != '\r') {
+                if (((char) tempchar) != '\r'&&(char)tempchar!='\n') {
                     re.append(tempchar);
                 }
             }
@@ -37,7 +37,7 @@ public class Main {
     }
     public static void main(String[] args) {
         Main work=new Main();
-        String yuanma=work.readbychar(args[0]);
+        String yuanma="54545454 4545 asdasd oiroere +             l        ";
         String []arr=yuanma.split("\\s+");
         int len=arr.length;
         for (String s : arr) {
