@@ -37,7 +37,7 @@ public class Main {
     }
     public static void main(String[] args) {
         Main work=new Main();
-        String yuanma="54545454 4545 asdasd oiroere +             l        ";
+        String yuanma=work.readbychar(args[0]);
         String []arr=yuanma.split("\\s+");
         int len=arr.length;
         for (String s : arr) {
