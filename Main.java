@@ -9,7 +9,7 @@ import java.sql.SQLOutput;
  * @Date 2020/10/10 21:31
  * @Created by lrf
  */
-public class Work {
+public class Main {
     public String readbychar(String filename){
         StringBuilder re= new StringBuilder();
         File file = new File(filename);
@@ -36,7 +36,7 @@ public class Work {
         return str.substring(i);
     }
     public static void main(String[] args) {
-        Work work=new Work();
+        Main work=new Main();
         String yuanma=work.readbychar(args[0]);
         String []arr=yuanma.split("\\s+");
         int len=arr.length;
