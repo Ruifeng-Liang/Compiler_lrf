@@ -1,4 +1,6 @@
-FROM openjdk:12
-WORKDIR /app/
+FROM ubuntu:20.04
+FROM openjdk:11
+RUN javac -version
+WORKDIR /
 COPY ./* ./
-RUN javac program.java
+RUN javac Main.java

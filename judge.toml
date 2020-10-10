@@ -1,7 +1,6 @@
 [jobs.pascal_lex]
-
 image = { source = "dockerfile", path = ".", tag = "pascal-lex-example" }
 
 run = [
-  "java program $input",
+  "java Main $input",
 ]
