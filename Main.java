@@ -18,9 +18,7 @@ public class Main {
             reader = new InputStreamReader(new FileInputStream(file));
             int tempchar;
             while ((tempchar = reader.read()) != -1) {
-                if (((char) tempchar) != '\r' && ((char) tempchar != '\n') ) {
                     re.append((char) tempchar);
-                }
             }
             reader.close();
         } catch (Exception e) {
@@ -125,7 +123,7 @@ public class Main {
                 i++;
                 continue;
             }
-            if(yuanma.charAt(i)==' '||yuanma.charAt(i)=='\t'){
+            if(yuanma.charAt(i)==' '||yuanma.charAt(i)=='\t'||yuanma.charAt(i)=='\n'||yuanma.charAt(i)=='\r'){
                 i++;
                 continue;
             }
