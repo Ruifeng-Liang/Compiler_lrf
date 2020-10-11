@@ -18,7 +18,7 @@ public class Main {
             reader = new InputStreamReader(new FileInputStream(file));
             int tempchar;
             while ((tempchar = reader.read()) != -1) {
-                if (((char) tempchar) != '\r' && ((char) tempchar != '\n') && ((char) tempchar) != ' ' && ((char) tempchar) != '\t') {
+                if (((char) tempchar) != '\r' && ((char) tempchar != '\n') ) {
                     re.append((char) tempchar);
                 }
             }
@@ -117,6 +117,10 @@ public class Main {
             }
             if(yuanma.charAt(i)==')'){
                 System.out.println("RParenthesis");
+                i++;
+                continue;
+            }
+            if(yuanma.charAt(i)==' '||yuanma.charAt(i)=='\t'){
                 i++;
                 continue;
             }
