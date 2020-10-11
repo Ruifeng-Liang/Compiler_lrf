@@ -31,7 +31,12 @@ public class Main {
 
     public String removezero(String str) {
         int len = str.length(), i = 0;
-        while (i < len && str.charAt(i) == '0') {
+        if(str.length()==1){
+            if(str.charAt(0)=='0'){
+                return str;
+            }
+        }
+        while (i < len-1&& str.charAt(i) == '0') {
             i++;
         }
         return str.substring(i);
@@ -80,7 +85,7 @@ public class Main {
                     token.append(yuanma.charAt(i));
                     i++;
                 }
-                System.out.println("Int(" + token.toString() + ")");
+                System.out.println("Int(" + work.removezero(token.toString()) + ")");
                 token.delete(0, token.length());
                 continue;
             }
