@@ -10,93 +10,121 @@ import java.sql.SQLOutput;
  * @Created by lrf
  */
 public class Main {
-    public String readbychar(String filename){
-        StringBuilder re= new StringBuilder();
+    public String readbychar(String filename) {
+        StringBuilder re = new StringBuilder();
         File file = new File(filename);
         InputStreamReader reader = null;
         try {
             reader = new InputStreamReader(new FileInputStream(file));
             int tempchar;
             while ((tempchar = reader.read()) != -1) {
-                if (((char) tempchar) != '\r'&&(char)tempchar!='\n') {
-                    re.append(tempchar);
+                if (((char) tempchar) != '\r' && ((char) tempchar != '\n') && ((char) tempchar) != ' ' && ((char) tempchar) != '\t') {
+                    re.append((char) tempchar);
                 }
             }
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(re.toString());
         return re.toString();
     }
-    public  String removezero(String str){
+
+    public String removezero(String str) {
         int len = str.length(), i = 0;
         while (i < len && str.charAt(i) == '0') {
             i++;
         }
         return str.substring(i);
     }
+
     public static void main(String[] args) {
-        Main work=new Main();
-        String yuanma=work.readbychar(args[0]);
-        String []arr=yuanma.split("\\s+");
-        int len=arr.length;
-        for (String s : arr) {
-            if (s.equals("BEGIN")) {
-                System.out.println("Begin");
+        Main work = new Main();
+        String yuanma = work.readbychar(args[0]);
+        int len = yuanma.length();
+        StringBuilder token = new StringBuilder();
+        int i = 0;
+        while (i < len) {
+            if (Character.isLetter(yuanma.charAt(i))) {
+                while (i < len && (Character.isLetter(yuanma.charAt(i)) || Character.isDigit(yuanma.charAt(i)))) {
+                    token.append(yuanma.charAt(i));
+                    i++;
+                }
+                switch (token.toString()) {
+                    case "BEGIN":
+                        System.out.println("Begin");
+                        break;
+                    case "END":
+                        System.out.println("End");
+                        break;
+                    case "FOR":
+                        System.out.println("For");
+                        break;
+                    case "IF":
+                        System.out.println("If");
+                        break;
+                    case "THEN":
+                        System.out.println("Then");
+                        break;
+                    case "ELSE":
+                        System.out.println("Else");
+                        break;
+                    default:
+                        System.out.println("Ident(" + token.toString() + ")");
+                        break;
+                }
+                token.delete(0, token.length());
                 continue;
             }
-            if (s.equals("END")) {
-                System.out.println("End");
+            if (Character.isDigit(yuanma.charAt(i))) {
+                while (i < len && Character.isDigit(yuanma.charAt(i))) {
+                    token.append(yuanma.charAt(i));
+                    i++;
+                }
+                System.out.println("Int(" + token.toString() + ")");
+                token.delete(0, token.length());
                 continue;
             }
-            if (s.equals("FOR")) {
-                System.out.println("For");
-                continue;
+            if (yuanma.charAt(i) == ':') {
+                if (i + 1 < len && yuanma.charAt(i + 1) == '=') {
+                    System.out.println("Assign");
+                    i = i + 2;
+                    continue;
+                } else {
+                    System.out.println("Colon");
+                    i++;
+                    continue;
+                }
             }
-            if (s.equals("IF")) {
-                System.out.println("If");
-                continue;
-            }
-            if (s.equals("THEN")) {
-                System.out.println("Then");
-                continue;
-            }
-            if (s.matches("^[A-Za-z][A-Za-z0-9]*$")) {
-                System.out.println("Ident(" + s + ")");
-                continue;
-            }
-            if (s.matches("^[0-9]+$")) {
-                System.out.println("Int(" + work.removezero(s) + ")");
-                continue;
-            }
-            if (s.equals(":")) {
-                System.out.println("Colon");
-                continue;
-            }
-            if (s.equals("+")) {
+            if (yuanma.charAt(i)=='+'){
                 System.out.println("Plus");
+                i++;
                 continue;
             }
-            if (s.equals("*")) {
+            if(yuanma.charAt(i)=='*'){
                 System.out.println("Star");
+                i++;
                 continue;
             }
-            if (s.equals("(")) {
+            if(yuanma.charAt(i)==','){
+                System.out.println("comma");
+                i++;
+                continue;
+            }
+            if(yuanma.charAt(i)=='('){
                 System.out.println("LParenthesis");
+                i++;
                 continue;
             }
-            if (s.equals(")")) {
+            if(yuanma.charAt(i)==')'){
                 System.out.println("RParenthesis");
-                continue;
-            }
-            if (s.equals(":=")) {
-                System.out.println("Assign");
+                i++;
                 continue;
             }
             System.out.println("Unknown");
             break;
+
+
         }
-
-
     }
 }
