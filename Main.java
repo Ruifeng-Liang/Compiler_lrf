@@ -109,7 +109,7 @@ public class Main {
                 continue;
             }
             if(yuanma.charAt(i)==','){
-                System.out.println("comma");
+                System.out.println("Comma");
                 i++;
                 continue;
             }
